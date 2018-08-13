@@ -1,0 +1,31 @@
+spring:
+  application:
+    name: ZuulAPIGateway
+server:
+  port: 8764
+  
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+    
+zuul:
+  routes:
+    user:
+      path: /users/**
+      service-id: user-microservice
+        
+    note:
+      path: /notes/**
+      service-id: notes-microservice
+      
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 360000 
+
+
+  
